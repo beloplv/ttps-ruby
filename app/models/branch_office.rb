@@ -5,7 +5,7 @@ class BranchOffice < ApplicationRecord
     has_and_belongs_to_many :schedule, optional:true, dependent: :destroy
 
     validates :name, :address, :phone, presence: { message: "fill in the fields" }
-    validates :name, uniqueness: { case_sensitive: false }
+    validates :name, uniqueness: true
 
     def self.valid_destroy_locality?(locality)
         branch_offices = BranchOffice.where(locality_id: locality)

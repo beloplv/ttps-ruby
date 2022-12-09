@@ -11,15 +11,15 @@
 <%= link_to "attend turn", edit_turn_path(@turn) %> 
 <% end %>
 <% end %>
-
-  
     <% if can? :destroy, @turn %>
-      <%= button_to "Cancelled this turn", @turn, method: :delete %>
+      <%= button_to "Cancelled this turn", @turn, form: { data: { turbo_confirm: "want to delete it?" } },method: :delete, class: 'btn btn-danger' %>
     <% end %>
 <% else %>
     <p>
     It cannot be edited or canceled because the shift is attended
     <p>
 <% end %>
+<% if can? :read, Turn %>
 <%= link_to "Back to turns", turns_path %>
+<% end %>
 </div>

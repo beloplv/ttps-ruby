@@ -61,11 +61,16 @@ class BranchOfficesSchedulesController < ApplicationController
 
   # DELETE /branch_offices_schedules/1 or /branch_offices_schedules/1.json
   def destroy
-    @branch_offices_schedule.destroy
-
     respond_to do |format|
+    if Turn.valid_destroy_branch_offices_schedule?(@branch_offices_schedule.branch_office_id, @branch_offices_schedule.schedule_id)
+      @branch_offices_schedule.destroy
       format.html { redirect_to branch_offices_schedules_url, notice: "Branch offices schedule was successfully destroyed." }
       format.json { head :no_content }
+    else
+      @branch_offices_schedule.errors.add(:id, :invalid, :message => ": The branch office has pending turns at that time. Cannot be deleted")
+      format.html { render :show, status: :unprocessable_entity }
+      format.json { render json: @branch_offices_schedule.errors, status: :unprocessable_entity }
+    end
     end
   end
 

@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_172234) do
     t.time "to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["day", "from", "to"], name: "index_schedules_on_day_and_from_and_to", unique: true
   end
 
   create_table "turns", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

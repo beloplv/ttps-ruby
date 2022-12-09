@@ -1,10 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @schedule %>
-
-<div>
-  <%= link_to "Edit this schedule", edit_schedule_path(@schedule) %> |
+ 
+<div> 
+<% if can? :update, @schedule %>
+  <%= link_to "Edit this schedule", edit_schedule_path(@schedule) %> 
+<% end %>
+<% if can? :read, Locality %>
   <%= link_to "Back to schedules", schedules_path %>
-
-  <%= button_to "Destroy this schedule", @schedule, method: :delete %>
+<% end %>
+  <% if can? :destroy, @schedule %>
+  <%= button_to "Destroy this schedule", @schedule, form: { data: { turbo_confirm: "want to delete it?" } },method: :delete, class: 'btn btn-danger' %>
+  <% end %>
 </div>

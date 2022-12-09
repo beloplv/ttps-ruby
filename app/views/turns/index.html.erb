@@ -3,8 +3,6 @@
 <h1>Turns</h1>
 
 <div id="turns">
-
-
   <% @turns.each do |turn| %>
     <% if can? :read, turn %>
     <%= render turn %>

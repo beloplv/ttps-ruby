@@ -23,5 +23,17 @@ class Turn < ApplicationRecord
             x.destroy
         end
     end 
-     
+
+    def self.valid_destroy_branch_offices_schedule?(branch_office, schedule)
+        turns = Turn.where(branch_office_id: branch_office)
+        schedule = Schedule.find_by(id: schedule)
+        turns.each do |x|
+            if x.status == "in_progress"
+                if x.hour.strftime("%H:%M").between?(schedule.from.strftime("%H:%M"),schedule.to.strftime("%H:%M")) && x.date.strftime("%A").downcase == schedule.day
+                    return false
+                end
+            end
+        end
+        return true 
+    end
 end

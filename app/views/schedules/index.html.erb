@@ -1,15 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Schedules</h1>
-
+ 
 <div id="schedules">
   <% @schedules.each do |schedule| %>
+    <% if can? :read, schedule %>
     <%= render schedule %>
     <p>
       <%= link_to "Show this schedule", schedule %>
     </p>
+    <% end %>
     
   <% end %>
 </div>
-
+<% if can? :create, Schedule %>
 <%= link_to "New schedule", new_schedule_path %>
+<% end %>

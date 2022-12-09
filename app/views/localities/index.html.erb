@@ -1,14 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Localities</h1>
-
+ 
 <div id="localities">
   <% @localities.each do |locality| %>
+    <% if can? :read, locality %>
     <%= render locality %>
     <p>
       <%= link_to "Show this locality", locality %>
     </p>
   <% end %>
+  <% end %>
 </div>
-
+<% if can? :read, Locality %>
 <%= link_to "New locality", new_locality_path %>
+<% end %>

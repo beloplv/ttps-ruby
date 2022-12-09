@@ -8,13 +8,13 @@
     <%= render branch_office %>
     <p>
       <%= link_to "Show this branch office", branch_office %>
-    
+     
     </p>
     <% end %>
   <% end %>
 </div>
 
-<% if can? :update, BranchOffice %>
+<% if can? :create, BranchOfficesSchedule %>
 <%= link_to "Add time to branch", new_branch_offices_schedule_path%>
 <% end %>
 <% if can? :create, BranchOffice %>

@@ -3,8 +3,13 @@
 <%= render @locality %>
 
 <div>
-  <%= link_to "Edit this locality", edit_locality_path(@locality) %> |
+<% if can? :update, @locality %>
+<%= link_to "Edit this locality", edit_locality_path(@locality) %> 
+<% end %>
+<% if can? :read, Locality %>
   <%= link_to "Back to localities", localities_path %>
-
-  <%= button_to "Destroy this locality", @locality, method: :delete %>
+<% end %>
+  <% if can? :destroy, @locality %>
+  <%= button_to "Destroy this locality", @locality, form: { data: { turbo_confirm: "want to delete it?" } },method: :delete, class: 'btn btn-danger' %>
+  <% end %>
 </div>

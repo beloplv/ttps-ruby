@@ -2,6 +2,7 @@ class Schedule < ApplicationRecord
   has_and_belongs_to_many :branch_office, optional: true, dependent: :destroy
 
   validates :day, :from, :to, presence: { message: "fill in the fields" }
+  validates :day, uniqueness: { scope: [:from, :to ], message: ": That schedule already exists for that day"} 
   
   def self.valid_schedule(from, to)
     from = from.split(':')

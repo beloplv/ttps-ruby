@@ -33,7 +33,7 @@ class SchedulesController < ApplicationController
         end
       else
         @schedule.errors.add(:from, :invalid, :message => ": inconsistent time")
-        @schedule.errors.add(:to, :invalid)
+        @schedule.errors.add(:to, :invalid, :message => ": inconsistent time")
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
       end
@@ -53,7 +53,7 @@ class SchedulesController < ApplicationController
         end
       else
         @schedule.errors.add(:from, :invalid, :message => ": inconsistent time")
-        @schedule.errors.add(:to, :invalid)  
+        @schedule.errors.add(:to, :invalid, :message => ": inconsistent time")  
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
       end

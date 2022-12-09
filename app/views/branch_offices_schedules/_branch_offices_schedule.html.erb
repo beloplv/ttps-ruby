@@ -1,3 +1,16 @@
+<%= form_with(model: branch_offices_schedule) do |form| %>
+  <% if branch_offices_schedule.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(branch_offices_schedule.errors.count, "error") %> prohibited this branch_offices_schedule from being saved:</h2>
+
+      <ul>
+        <% branch_offices_schedule.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
 <div id="<%= dom_id branch_offices_schedule %>">
   <p>
     <strong>Branch office:</strong>
@@ -10,3 +23,4 @@
   </p>
 
 </div>
+<% end %>
