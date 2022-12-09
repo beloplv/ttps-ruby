@@ -1,0 +1,37 @@
+<%= form_with(model: branch_office) do |form| %>
+  <% if branch_office.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(branch_office.errors.count, "error") %> prohibited this branch_office from being saved:</h2>
+
+      <ul>
+        <% branch_office.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :address, style: "display: block" %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :phone, style: "display: block" %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div>
+  <%= form.label :Locality_id, style: "display: block" %>
+    <%= form.select :locality_id, options_for_select(Locality.all.collect { |x| [x.province + " - " + x.name , x.id]}, Locality.name) %>
+  </div>
+  
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

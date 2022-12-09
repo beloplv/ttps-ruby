@@ -1,0 +1,67 @@
+<%= form_with(model: turn) do |form| %>
+  <% if turn.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(turn.errors.count, "error") %> prohibited this turn from being saved:</h2>
+
+      <ul>
+        <% turn.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% if current_user.role == "client" %>
+    <div>
+      <%= form.label :BranchOffice_id, style: "display: block" %>
+      <%= form.select :branch_office_id, options_for_select(BranchOffice.all.collect { |x| [x.name + " (" + x.address + " )" , x.id]}, BranchOffice.name) %>
+    </div>
+
+
+    <div>
+      <%= form.label :date, style: "display: block" %>
+      <%= form.date_field :date %>
+    </div>
+
+    <div>
+      <%= form.label :hour, style: "display: block" %>
+      <%= form.time_field :hour %>
+    </div>
+
+    <div>
+      <%= form.label :motive, style: "display: block" %>
+      <%= form.text_field :motive %>
+    </div>
+<% else %>
+  <p>
+    <strong>Branch Office:</strong>
+    <%= turn.branch_office_id %>
+  </p>
+  <p>
+    <strong>User:</strong>
+    <%= turn.user_id %>
+  </p>
+  <p>
+    <strong>Date:</strong>
+    <%= turn.date %>
+  </p>
+
+  <p>
+    <strong>Hour:</strong>
+    <%= turn.hour.strftime("%H:%M") %>
+  </p>
+
+  <p>
+    <strong>Motive:</strong>
+    <%= turn.motive %>
+  </p>
+  
+  <div>
+    <%= form.label :result, style: "display: block" %>
+    <%= form.text_field :result %>
+  </div>
+
+<% end %>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Branch offices</h1>
+
+<div id="branch_offices">
+  <% @branch_offices.each do |branch_office| %>
+    <% if can? :read, branch_office %>
+    <%= render branch_office %>
+    <p>
+      <%= link_to "Show this branch office", branch_office %>
+    
+    </p>
+    <% end %>
+  <% end %>
+</div>
+
+<% if can? :update, BranchOffice %>
+<%= link_to "Add time to branch", new_branch_offices_schedule_path%>
+<% end %>
+<% if can? :create, BranchOffice %>
+  <%= link_to "New branch office", new_branch_office_path %>
+<% end %>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Branch offices schedules</h1>
+
+<div id="branch_offices_schedules">
+  <% @branch_offices_schedules.each do |branch_offices_schedule| %>
+    <%= render branch_offices_schedule %>
+    <p>
+      <%= link_to "Show this branch offices schedule", branch_offices_schedule %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New branch offices schedule", new_branch_offices_schedule_path %>

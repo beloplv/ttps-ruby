@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @turn %>
+
+<% if @in_progress %>
+<div>
+<% if can? :update, @turn %>
+<% if current_user.role == "client" %>
+  <%= link_to "Edit this turn", edit_turn_path(@turn) %> 
+<% else %>
+<%= link_to "attend turn", edit_turn_path(@turn) %> 
+<% end %>
+<% end %>
+
+  
+    <% if can? :destroy, @turn %>
+      <%= button_to "Cancelled this turn", @turn, method: :delete %>
+    <% end %>
+<% else %>
+    <p>
+    It cannot be edited or canceled because the shift is attended
+    <p>
+<% end %>
+<%= link_to "Back to turns", turns_path %>
+</div>

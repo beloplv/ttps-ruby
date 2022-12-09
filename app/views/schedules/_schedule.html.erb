@@ -1,0 +1,31 @@
+<%= form_with(model: schedule) do |form| %>
+  <% if schedule.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
+
+      <ul>
+        <% schedule.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div id="<%= dom_id schedule %>">
+  <p>
+    <strong>Day:</strong>
+    <%= schedule.day.inspect %>
+  </p>
+
+  <p>
+    <strong>From:</strong>
+    <%= schedule.from.strftime("%H:%M")%>
+  </p>
+
+  <p>
+    <strong>To:</strong>
+    <%= schedule.to.strftime("%H:%M")%>
+  </p>
+
+</div>
+<% end %>

@@ -1,0 +1,61 @@
+<h2>Sign up</h2>
+
+<%= form_with(model: user) do |f| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+<% if @ok %>
+
+  <div>
+  <%= f.label :role %>
+  <%= f.select :role, options_for_select(get_roles)%>
+</div>
+<% else %>
+<div>
+  <%= f.label :role %>  
+  <%= @user.role %>
+  </div>
+<% end %>
+
+
+<% if @user.role == "employee" || @user.role == "client"%>
+<p>
+<br>
+if the role is administrator do not select this field
+</p> 
+<div>
+<%= f.label :branch_office_id, style: "display: block" %>
+<%= f.select :branch_office_id, options_for_select(BranchOffice.all.collect { |x| [x.name + " (" + x.address + ") " , x.id]}) %>
+
+</div>
+<% end %>
+  <div class="actions">
+    <%= f.submit "Sign up", data: {turbo: false}%>
+  </div>
+<% end %>

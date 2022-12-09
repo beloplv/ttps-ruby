@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Turns</h1>
+
+<div id="turns">
+
+
+  <% @turns.each do |turn| %>
+    <% if can? :read, turn %>
+    <%= render turn %>
+    <p>
+      <%= link_to "Show this turn", turn %>
+    </p>
+  <% end %>
+  <% end %>
+</div>
+<% if can? :create, Turn %>
+  <%= link_to "New turn", new_turn_path %>
+<% end %>

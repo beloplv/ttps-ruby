@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  resources :sucursals
-  devise_for :usuarios
-  get 'index/home'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :branch_offices_schedules
+  resources :turns
+  devise_for :users
+  resources :branch_offices
+  resources :schedules
+  resources :localities
+  resources :users, path: '/users_administrator'
 
-  # Defines the root path route ("/")
+  get 'index/home'
+  get 'index/index'
   root "index#home"
 end

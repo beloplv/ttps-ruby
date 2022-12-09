@@ -1,0 +1,32 @@
+<div id="<%= dom_id turn %>">
+  <p>
+    <strong>Date:</strong>
+    <%= turn.date %>
+  </p>
+
+  <p>
+    <strong>Hour:</strong>
+    <%= turn.hour.strftime("%H:%M") %>
+  </p>
+
+  <p>
+    <strong>Motive:</strong>
+    <%= turn.motive %>
+  </p>
+<% if turn.result == nil %>
+  <p>
+    <strong>Result:</strong>  
+    <%= "empty" %>
+  </p>
+<% else %>
+  <p>
+    <strong>Result:</strong>
+    <%= turn.result %>
+  </p>
+<% end %>
+  <p>
+    <strong>Status:</strong>
+    <%= turn.status %>
+  </p>
+
+</div>
