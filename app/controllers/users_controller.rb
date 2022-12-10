@@ -8,19 +8,17 @@ class UsersController < ApplicationController
   
     # GET /users/1 or /users/1.json
     def show
-    end
+    end 
   
     # GET /users/new
     def new
       @user = User.new
       @ok = true
-      @ok_2 = false
     end
   
     # GET /users/1/edit
     def edit
       @ok = false
-      @ok_2 = true
     end
   
     def administrator
@@ -67,10 +65,10 @@ class UsersController < ApplicationController
       respond_to do |format|
       if @user.role == "client" || @user.role == "employee"
         Turn.destroy_turns_users(@user.id)
-        @user.destroy
-        format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-        format.json { head :no_content }
       end
+      @user.destroy
+      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      format.json { head :no_content }
       end
     end
   

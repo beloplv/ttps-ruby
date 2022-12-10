@@ -27,7 +27,7 @@ class TurnsController < ApplicationController
     p(@turn)
     @turn.user_id = current_user.id
     respond_to do |format|
-      if BranchOfficesSchedule.valid_turn(turn_params["branch_office_id"], turn_params["date"], turn_params["hour"])
+      if BranchOfficesSchedule.valid_turn?(turn_params["branch_office_id"], turn_params["date"], turn_params["hour"])
         if @turn.save
           format.html { redirect_to turn_url(@turn), notice: "Turn was successfully created." }
           format.json { render :show, status: :created, location: @turn }
@@ -45,7 +45,7 @@ class TurnsController < ApplicationController
 
   def update_client
     respond_to do |format|
-      if BranchOfficesSchedule.valid_turn(turn_params["branch_office_id"], turn_params["date"], turn_params["hour"])
+      if BranchOfficesSchedule.valid_turn?(turn_params["branch_office_id"], turn_params["date"], turn_params["hour"])
           if @turn.update(turn_params)
             format.html { redirect_to turn_url(@turn), notice: "Turn was successfully updated." }
             format.json { render :show, status: :ok, location: @turn }

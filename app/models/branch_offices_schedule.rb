@@ -2,7 +2,7 @@ class BranchOfficesSchedule < ApplicationRecord
   belongs_to :branch_office
   belongs_to :schedule
 
-  def self.valid_branch_office_schedule(b_id, s_id, ok)
+  def self.valid_branch_office_schedule?(b_id, s_id, ok)
     coincidence = BranchOfficesSchedule.where(branch_office_id: b_id)
     schedule_select = Schedule.find_by(id: s_id)
     coincidence.each do |x|
@@ -22,7 +22,10 @@ class BranchOfficesSchedule < ApplicationRecord
     return true
  end
  
-  def self.valid_turn(b_id, date, hour)
+  def self.valid_turn?(b_id, date, hour)
+    if hour == "" || date == ""
+      return false
+    end
     coincidence = BranchOfficesSchedule.where(branch_office_id: b_id)
     coincidence.each do |x|
     schedule = Schedule.find_by(id: x.schedule_id)

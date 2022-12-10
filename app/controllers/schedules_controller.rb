@@ -23,7 +23,7 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
     respond_to do |format|
-      if Schedule.valid_schedule(schedule_params["from"], schedule_params["to"])
+      if Schedule.valid_schedule?(schedule_params["from"], schedule_params["to"])
         if @schedule.save
           format.html { redirect_to schedule_url(@schedule), notice: "Schedule was successfully created." }
           format.json { render :show, status: :created, location: @schedule }
@@ -43,7 +43,7 @@ class SchedulesController < ApplicationController
   # PATCH/PUT /schedules/1 or /schedules/1.json
   def update
     respond_to do |format|
-      if Schedule.valid_schedule(schedule_params["from"], schedule_params["to"])
+      if Schedule.valid_schedule?(schedule_params["from"], schedule_params["to"])
         if @schedule.update(schedule_params)
           format.html { redirect_to schedule_url(@schedule), notice: "Schedule was successfully updated." }
           format.json { render :show, status: :ok, location: @schedule }

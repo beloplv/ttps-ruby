@@ -24,7 +24,7 @@ class BranchOfficesSchedulesController < ApplicationController
     @branch_offices_schedule = BranchOfficesSchedule.new(branch_offices_schedule_params)
 
     respond_to do |format|
-      if BranchOfficesSchedule.valid_branch_office_schedule(@branch_offices_schedule.branch_office_id, @branch_offices_schedule.schedule_id, false)
+      if BranchOfficesSchedule.valid_branch_office_schedule?(@branch_offices_schedule.branch_office_id, @branch_offices_schedule.schedule_id, false)
         if @branch_offices_schedule.save
           format.html { redirect_to branch_offices_schedule_url(@branch_offices_schedule), notice: "Branch offices schedule was successfully created." }
           format.json { render :show, status: :created, location: @branch_offices_schedule }
@@ -43,7 +43,7 @@ class BranchOfficesSchedulesController < ApplicationController
   # PATCH/PUT /branch_offices_schedules/1 or /branch_offices_schedules/1.json
   def update
     respond_to do |format|
-      if BranchOfficesSchedule.valid_branch_office_schedule(branch_offices_schedule_params["branch_office_id"], branch_offices_schedule_params["schedule_id"], true)
+      if BranchOfficesSchedule.valid_branch_office_schedule?(branch_offices_schedule_params["branch_office_id"], branch_offices_schedule_params["schedule_id"], true)
         if @branch_offices_schedule.update(branch_offices_schedule_params)
           format.html { redirect_to branch_offices_schedule_url(@branch_offices_schedule), notice: "Branch offices schedule was successfully updated." }
           format.json { render :show, status: :ok, location: @branch_offices_schedule }

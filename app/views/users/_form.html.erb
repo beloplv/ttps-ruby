@@ -36,15 +36,6 @@
   <%= f.label :role %>
   <%= f.select :role, options_for_select(get_roles)%>
 </div>
-<% else %>
-<div>
-  <%= f.label :role %>  
-  <%= @user.role %>
-  </div>
-<% end %>
-
-
-<% if @user.role == "employee" || @user.role == "client"%>
 <p>
 <br>
 if the role is administrator do not select this field
@@ -52,8 +43,18 @@ if the role is administrator do not select this field
 <div>
 <%= f.label :branch_office_id, style: "display: block" %>
 <%= f.select :branch_office_id, options_for_select(BranchOffice.all.collect { |x| [x.name + " (" + x.address + ") " , x.id]}) %>
-
 </div>
+<% else %>
+<div>
+  <%= f.label :role %>  
+  <%= @user.role %>
+  <% if @user.role == "employee"%>
+  <div> 
+  <%= f.label :branch_office_id, style: "display: block" %>
+  <%= f.select :branch_office_id, options_for_select(BranchOffice.all.collect { |x| [x.name + " (" + x.address + ") " , x.id]}) %>
+  </div>
+  <% end %>
+  </div>
 <% end %>
   <div class="actions">
     <%= f.submit "Sign up", data: {turbo: false}%>
