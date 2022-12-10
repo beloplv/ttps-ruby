@@ -1,18 +1,39 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Users</h1>
-
-<div id="users">
-  <% @users.each do |user| %>
-    <% if can? :read, user %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-    <% end %>
-  <% end %>
+<br>
+<% if can? :create, User %>
+<div class="btn btn-success" color=#fff>
+<%= link_to "New user", new_user_path %>
 </div>
 
-<% if can? :create, User %>
-<%= link_to "New user", new_user_path %>
 <% end %>
+
+<br>
+<br>
+
+<div id="users">
+
+<table class="table table-dark table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+      <th scope="col"></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+      <% if can? :read, user %>
+      <tr>
+        <td><%=user.email%></td>
+        <td><%=user.role%></td>
+        <td><%= link_to "Show this user", user %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+   
+</div>

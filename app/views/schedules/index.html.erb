@@ -2,17 +2,39 @@
 
 <h1>Schedules</h1>
  
-<div id="schedules">
-  <% @schedules.each do |schedule| %>
-    <% if can? :read, schedule %>
-    <%= render schedule %>
-    <p>
-      <%= link_to "Show this schedule", schedule %>
-    </p>
-    <% end %>
-    
-  <% end %>
-</div>
+<br>
 <% if can? :create, Schedule %>
+<div class="btn btn-success">
 <%= link_to "New schedule", new_schedule_path %>
+</div>
+
 <% end %>
+
+<br>
+<br>
+
+<div id="schedules">
+<table class="table table-dark table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Day</th>
+      <th scope="col">From</th>
+      <th scope="col">To</th>
+      <th scope="col"></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <% @schedules.each do |schedule| %>
+      <% if can? :read, schedule %>
+      <tr>
+        <td><%=schedule.day%></td>
+        <td><%=schedule.from.strftime("%H:%M")%></td>
+        <td><%=schedule.to.strftime("%H:%M")%></td>
+        <td><%= link_to "Show this schedule", schedule %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

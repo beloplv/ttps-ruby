@@ -2,16 +2,47 @@
 
 <h1>Turns</h1>
 
-<div id="turns">
-  <% @turns.each do |turn| %>
-    <% if can? :read, turn %>
-    <%= render turn %>
-    <p>
-      <%= link_to "Show this turn", turn %>
-    </p>
-  <% end %>
-  <% end %>
-</div>
+<br>
 <% if can? :create, Turn %>
-  <%= link_to "New turn", new_turn_path %>
+<div class="btn btn-success">
+<%= link_to "New turn", new_turn_path %>
+</div>
+
 <% end %>
+
+<br>
+<br>
+
+<div id="turns">
+<table class="table table-dark table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Hour</th>
+      <th scope="col">Motive</th>
+      <th scope="col">Status</th>
+      <th scope="col">Result</th>
+      <th scope="col"></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <% @turns.each do |turn| %>
+      <% if can? :read, turn %>
+      <tr>
+        <td><%=turn.date%></td>
+        <td><%=turn.hour.strftime("%H:%M")%></td>
+        <td><%=turn.motive%></td>
+        <td><%=turn.status%></td>
+        <% if turn.result == nil %>
+          <td><%= "empty" %></td>
+        <% else %>
+          <td><%= turn.result %></td>
+        <% end %>
+        <td><%= link_to "Show this turn", turn %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

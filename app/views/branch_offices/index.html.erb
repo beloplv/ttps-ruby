@@ -2,21 +2,46 @@
 
 <h1>Branch offices</h1>
 
-<div id="branch_offices">
-  <% @branch_offices.each do |branch_office| %>
-    <% if can? :read, branch_office %>
-    <%= render branch_office %>
-    <p>
-      <%= link_to "Show this branch office", branch_office %>
-     
-    </p>
-    <% end %>
-  <% end %>
+<br>
+<% if can? :create, BranchOffice %>
+<div class="btn btn-success">
+<%= link_to "New branch office", new_branch_office_path%> <br>
+</div>
+<br>
+<br>
+<div class="btn btn-dark">
+<% if can? :read, BranchOfficesSchedule %>
+<%= link_to "see branch office hours", branch_offices_schedules_path%>
+<% end %>
 </div>
 
-<% if can? :create, BranchOfficesSchedule %>
-<%= link_to "Add time to branch", new_branch_offices_schedule_path%>
 <% end %>
-<% if can? :create, BranchOffice %>
-  <%= link_to "New branch office", new_branch_office_path %>
-<% end %>
+
+<br>
+<br>
+
+<div id="branch_offices">
+<table class="table table-dark table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone</th>
+      <th scope="col"></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <% @branch_offices.each do |branch_office| %>
+      <% if can? :read, branch_office %>
+      <tr>
+        <td><%=branch_office.name%></td>
+        <td><%=branch_office.address%></td>
+        <td><%=branch_office.phone%></td>
+        <td><%= link_to "Show this branch office", branch_office %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

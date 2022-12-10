@@ -29,4 +29,21 @@
     <%= turn.status %>
   </p>
 
+  <p>
+  <strong>User:</strong>
+  <%= turn.user_id %>
+</p>
+
+<% if turn.employee_id == nil %>
+  <p>
+    <strong>Employee:</strong>  
+    <%= "empty" %>
+  </p>
+<% else %>
+  <p>
+    <strong>Employee:</strong>
+    <%= turn.employee_id %>
+  </p>
+<% end %>
+
 </div>

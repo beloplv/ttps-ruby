@@ -8,14 +8,150 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    
+    <%= stylesheet_link_tag "styles.css" %>
+
+    
   </head>
 
-  <body>
+  <body class="sb-nav-fixed">
+  <% if signed_in? %>
+  <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+      <!-- Navbar Brand-->
+      <a class="navbar-brand ps-3">BANKAPP <i class="fas fa-regular fa-dollar-sign"></i></a> 
+      </form>
+      
 
-    <%= yield %>
+  </nav>
+  <div id="layoutSidenav">
+      <div id="layoutSidenav_nav">
+          <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+              <div class="sb-sidenav-menu">
+                  <div class="nav">
+                    <div class="sb-sidenav-menu-heading">
+                        Options</div>
 
-  </body>
+                        <a class="nav-link" href="/" >
+                        <div class="sb-nav-link-icon"><i class="fas fa-solid fa-warehouse"></i></div>
+                          Home
+                        </a>
+                       
+
+                        <a class="nav-link" href="<%=user_path(:id => current_user.id)%>" >
+                        <div class="sb-nav-link-icon"><i class="fas fa-regular fa-address-card"></i></div>
+                          My profile
+                        </a>
+                        
+
+                        <% if current_user.role == "administrator" || current_user.role == "employee" %>
+                        <% if can? :read, User %>
+                          <a class="nav-link" href="<%=users_path%>" >
+                          <div class="sb-nav-link-icon"><i class="fas fa-user fa-fw"></i></div>
+                             Users 
+                          </a>
+                        <% end %>
+                      <% end %>
+
+                  <% if can? :read, BranchOffice %>
+                    <a class="nav-link" href="<%=branch_offices_path%>" >
+                    <div class="sb-nav-link-icon"><i class="fas fa-regular fa-landmark"></i></div>
+                      Branch Offices
+                    </a>
+                  <% end %>
 
 
+                  <% if can? :manage, Schedule %>
+                    <a class="nav-link" href="<%=schedules_path%>" >
+                    <div class="sb-nav-link-icon"><i class="fas fa-solid fa-clock"></i></div>
+                      Schedules
+                    </a>
+                  <% end %>
+                  
+
+                  <% if can? :read, Locality %>
+                    <a class="nav-link" href="<%=localities_path%>" >
+                    <div class="sb-nav-link-icon"><i class="fas fa-regular fa-globe"></i></div>
+                      Localities
+                    </a>
+                  <% end %>
+
+
+                  <% if can? :read, Turn %>
+                    <a class="nav-link" href="<%=turns_path%>" >
+                    <div class="sb-nav-link-icon"><i class="fas fa-solid fa-calendar"></i></div>
+                      Turns
+                    </a>
+                  <% end %>
+                <% if current_user.role == "administrator"%>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                <% else %>
+                <% if current_user.role == "employee"%>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <% else %>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <% end %>
+                <% end %>
+                  <a class="nav-link" href="<%=destroy_user_session_path%>" >
+                  <div class="sb-nav-link-icon"><i class="fas fa-regular fa-power-off"></i></div>
+                    Logout
+                  </a>
+          
+
+              <div class="sb-sidenav-footer">
+                  <div class="small">Logged in as:</div>
+                  <%= current_user.email %>
+              </div>
+          </nav>
+      </div>
+      <div id="layoutSidenav_content">
+          <main>
+     
+
+          <% end %>
+          <%= yield %>  
+
+          </main>
+          <footer class="py-4 bg-light mt-auto">
+              <div class="container-fluid px-4">
+                  <div class="d-flex align-items-center justify-content-between small">
+                      <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                      <div>
+                          <a href="#">Privacy Policy</a>
+                          &middot;
+                          <a href="#">Terms &amp; Conditions</a>
+                      </div>
+                  </div>
+              </div>
+          </footer>
+      </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="js/scripts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+  <script src="assets/demo/chart-area-demo.js"></script>
+  <script src="assets/demo/chart-bar-demo.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+  <script src="js/datatables-simple-demo.js"></script>
+
+</body>
 </html>
