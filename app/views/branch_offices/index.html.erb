@@ -4,16 +4,13 @@
 
 <br>
 <% if can? :create, BranchOffice %>
-<div class="btn btn-success">
-<%= link_to "New branch office", new_branch_office_path%> <br>
-</div>
+<%= link_to "New branch office", new_branch_office_path, class:"btn btn-success"%> <br>
 <br>
-<br>
-<div class="btn btn-dark">
 <% if can? :read, BranchOfficesSchedule %>
-<%= link_to "see branch office hours", branch_offices_schedules_path%>
+
+<%= link_to "new branch office hours", new_branch_offices_schedule_path , class:"btn btn-success"%>
 <% end %>
-</div>
+
 
 <% end %>
 
@@ -28,6 +25,7 @@
       <th scope="col">Address</th>
       <th scope="col">Phone</th>
       <th scope="col"></th>
+      <th scope="col"></th>
 
     </tr>
     </thead>
@@ -38,7 +36,8 @@
         <td><%=branch_office.name%></td>
         <td><%=branch_office.address%></td>
         <td><%=branch_office.phone%></td>
-        <td><%= link_to "Show this branch office", branch_office %></td>
+        <td><%= link_to "Show this branch office", branch_office, class:"btn btn-primary"%></td>
+        <td><%= link_to "Show this schedules", branch_offices_schedules_path(branch_office_id: branch_office.id ) , class:"btn btn-primary"%></td>
       </tr>
       <% end %>
       <% end %>

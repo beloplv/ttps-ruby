@@ -14,12 +14,12 @@
 <div id="<%= dom_id branch_offices_schedule %>">
   <p>
     <strong>Branch office:</strong>
-    <%= branch_offices_schedule.branch_office_id %>
+    <%= @branch_office.name %>
   </p>
 
   <p>
     <strong>Schedule:</strong>
-    <%= branch_offices_schedule.schedule_id %>
+    <%= @schedule.day %> <%= @schedule.from.strftime("%H:%M") %> - <%= @schedule.to.strftime("%H:%M")%>
   </p>
 
 </div>

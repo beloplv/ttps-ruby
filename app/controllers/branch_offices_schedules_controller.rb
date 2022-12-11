@@ -3,20 +3,26 @@ class BranchOfficesSchedulesController < ApplicationController
 
   # GET /branch_offices_schedules or /branch_offices_schedules.json
   def index
-    @branch_offices_schedules = BranchOfficesSchedule.all
+    @branch_offices_schedules = BranchOfficesSchedule.return_schedules(params[:branch_office_id])
+    @branch_office = BranchOffice.return_branch_office(params[:branch_office_id])
   end
 
   # GET /branch_offices_schedules/1 or /branch_offices_schedules/1.json
   def show
+    @branch_office = BranchOffice.return_branch_office(@branch_offices_schedule.branch_office_id)
+    @schedule = Schedule.return_schedule(@branch_offices_schedule.schedule_id)
   end
 
   # GET /branch_offices_schedules/new
   def new
     @branch_offices_schedule = BranchOfficesSchedule.new
+    @ok = false
   end
 
   # GET /branch_offices_schedules/1/edit
   def edit
+    @ok = true
+    @branch_office = BranchOffice.return_branch_office(@branch_offices_schedule.branch_office_id)
   end
 
   # POST /branch_offices_schedules or /branch_offices_schedules.json
@@ -24,7 +30,7 @@ class BranchOfficesSchedulesController < ApplicationController
     @branch_offices_schedule = BranchOfficesSchedule.new(branch_offices_schedule_params)
 
     respond_to do |format|
-      if BranchOfficesSchedule.valid_branch_office_schedule?(@branch_offices_schedule.branch_office_id, @branch_offices_schedule.schedule_id, false)
+      if BranchOfficesSchedule.valid_branch_office_schedule?(@branch_offices_schedule.branch_office_id, @branch_offices_schedule.schedule_id)
         if @branch_offices_schedule.save
           format.html { redirect_to branch_offices_schedule_url(@branch_offices_schedule), notice: "Branch offices schedule was successfully created." }
           format.json { render :show, status: :created, location: @branch_offices_schedule }
@@ -39,11 +45,12 @@ class BranchOfficesSchedulesController < ApplicationController
       end
     end
   end
- 
+  
   # PATCH/PUT /branch_offices_schedules/1 or /branch_offices_schedules/1.json
   def update
+    branch_offices_schedule_params["branch_office_id"] = @branch_offices_schedule.branch_office_id
     respond_to do |format|
-      if BranchOfficesSchedule.valid_branch_office_schedule?(branch_offices_schedule_params["branch_office_id"], branch_offices_schedule_params["schedule_id"], true)
+      if BranchOfficesSchedule.valid_branch_office_schedule?(@branch_offices_schedule.branch_office_id, branch_offices_schedule_params["schedule_id"])
         if @branch_offices_schedule.update(branch_offices_schedule_params)
           format.html { redirect_to branch_offices_schedule_url(@branch_offices_schedule), notice: "Branch offices schedule was successfully updated." }
           format.json { render :show, status: :ok, location: @branch_offices_schedule }
@@ -61,10 +68,12 @@ class BranchOfficesSchedulesController < ApplicationController
 
   # DELETE /branch_offices_schedules/1 or /branch_offices_schedules/1.json
   def destroy
+    @branch_office = BranchOffice.return_branch_office(@branch_offices_schedule.branch_office_id)
+    @schedule = Schedule.return_schedule(@branch_offices_schedule.schedule_id)
     respond_to do |format|
     if Turn.valid_destroy_branch_offices_schedule?(@branch_offices_schedule.branch_office_id, @branch_offices_schedule.schedule_id)
       @branch_offices_schedule.destroy
-      format.html { redirect_to branch_offices_schedules_url, notice: "Branch offices schedule was successfully destroyed." }
+      format.html { redirect_to branch_offices_url, notice: "Branch offices schedule was successfully destroyed." }
       format.json { head :no_content }
     else
       @branch_offices_schedule.errors.add(:id, :invalid, :message => ": The branch office has pending turns at that time. Cannot be deleted")

@@ -2,14 +2,12 @@
 
 <%= render @branch_offices_schedule %>
 
+<% if can? :destroy, BranchOfficesSchedule %>
+<%= button_to "Destroy this branch office schedule", @branch_offices_schedule ,form: { data: { turbo_confirm: "want to delete it?" } },method: :delete, class: 'btn btn-danger'%>
+<% end %>        
 <div>
-<% if can? :update, @branch_offices_schedule %>
-  <%= link_to "Edit this branch offices schedule", edit_branch_offices_schedule_path(@branch_offices_schedule) %> |
-<% end %>
-<% if can? :read, @branch_offices_schedule %>
-  <%= link_to "Back to branch offices schedules", branch_offices_schedules_path %>
-<% end %>
-<% if can? :destroy, @branch_offices_schedule %>
-  <%= button_to "Destroy this branch office schedule", @branch_offices_schedule, form: { data: { turbo_confirm: "want to delete it?" } },method: :delete, class: 'btn btn-danger' %>
+<% if can? :read, BranchOffice %>
+<%= link_to "Back to branch offices", branch_offices_path %>
 <% end %>
 </div>
+ 

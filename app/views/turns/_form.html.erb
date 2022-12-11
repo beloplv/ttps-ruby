@@ -13,7 +13,7 @@
 <% if current_user.role == "client" %>
     <div>
       <%= form.label :BranchOffice_id, style: "display: block" %>
-      <%= form.select :branch_office_id, options_for_select(BranchOffice.all.collect { |x| [x.name + " (" + x.address + " )" , x.id]}, BranchOffice.name) %>
+      <%= form.select :branch_office_id, options_for_select(BranchOffice.all.collect { |x| [x.name + " (" + x.address + " )" , x.id]}, turn.branch_office_id) %>
     </div>
 
 

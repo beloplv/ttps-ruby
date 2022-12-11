@@ -1,38 +1,51 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Branch offices schedules</h1>
+<h1>Branch office: <%=@branch_office.name%> (<%=@branch_office.address%>)</h1>
 
 <br>
-<% if can? :create, BranchOfficesSchedule %>
-<div class="btn btn-success">
-<%= link_to "New branch offices schedule", new_branch_offices_schedule_path %>
-</div>
-
-<% end %>
 
 <br>
 <br>
 <div id="branch_offices_schedules">
+<% if @branch_offices_schedules == {} %>
+ <p>does not have schedules</p>
+ <br>
+
+<% else %>
 <table class="table table-dark table-hover">
     <thead>
     <tr>
-      <th scope="col">Branch office</th>
-      <th scope="col">Schedule</th>
+      <th scope="col">Day</th>
+      <th scope="col">From</th>
+      <th scope="col">To</th>
+      <th scope="col"></th>
       <th scope="col"></th>
 
     </tr>
     </thead>
     <tbody>
-
-    <% @branch_offices_schedules.each do |branch_offices_schedule| %>
-      <% if can? :read, branch_offices_schedule %>
+    <% @branch_offices_schedules.each do |clave, branch_offices_schedule| %>
+      <% if can? :read, Schedule %>
       <tr>
-        <td><%=branch_offices_schedule.branch_office_id%></td>
-        <td><%=branch_offices_schedule.schedule_id%></td>
-        <td><%= link_to "Show this branch office schedule", branch_offices_schedule %></td>
+        <td><%=branch_offices_schedule["day"]%></td>
+        <td><%=branch_offices_schedule["from"].strftime("%H:%M")%></td>
+        <td><%=branch_offices_schedule["to"].strftime("%H:%M")%></td>
+        <td>
+        <% if can? :update, BranchOfficesSchedule %>
+        <%= link_to "Edit this schedules", edit_branch_offices_schedule_path(branch_offices_schedule["id"]) , class:"btn btn-primary"%>
+        <% end %>
+        </td>
+        
+        <% if can? :read, Schedule %>
+        <td>
+        <%= link_to "Show this schedule", branch_offices_schedule_path(branch_offices_schedule["id"]), class:"btn btn-primary"%></td>
+        </td>
+        <% end %>
       </tr>
+      <% end %>
       <% end %>
       <% end %>
     </tbody>
   </table>
+  <%= link_to "Back to branch offices", branch_offices_path %>
 </div>

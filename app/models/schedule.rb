@@ -14,5 +14,9 @@ class Schedule < ApplicationRecord
     end
   end
 
+  def self.return_schedule(schedule)
+    Schedule.find_by(id: schedule)
+  end
+
   enum :day, [:monday, :tuesday, :wednesday, :thursday, :friday]
 end

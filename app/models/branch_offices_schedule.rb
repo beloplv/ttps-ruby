@@ -2,23 +2,15 @@ class BranchOfficesSchedule < ApplicationRecord
   belongs_to :branch_office
   belongs_to :schedule
 
-  def self.valid_branch_office_schedule?(b_id, s_id, ok)
+  def self.valid_branch_office_schedule?(b_id, s_id)
     coincidence = BranchOfficesSchedule.where(branch_office_id: b_id)
     schedule_select = Schedule.find_by(id: s_id)
     coincidence.each do |x|
       schedule_current = Schedule.find_by(id: x.schedule_id)
-      if ok
-        if !schedule_current.id == schedule_select.id
-          if schedule_current.day == schedule_select.day 
-            return false
-          end
-        end 
-      else
         if schedule_current.day == schedule_select.day
           return false
         end
       end
-    end
     return true
  end
  
@@ -51,5 +43,15 @@ class BranchOfficesSchedule < ApplicationRecord
     end
     return false
   end 
+
+  def self.return_schedules(branch_office)
+    branch_offices_schedule = BranchOfficesSchedule.where(branch_office_id: branch_office)
+    schedules = {}
+    branch_offices_schedule.each do |x|
+      current_schedule = Schedule.find_by(id: x.schedule_id)
+      schedules[current_schedule.id] = {"day" => current_schedule.day, "from" => current_schedule.from, "to" => current_schedule.to, "id" => x.id}
+    end 
+    return schedules   
+  end
 
 end

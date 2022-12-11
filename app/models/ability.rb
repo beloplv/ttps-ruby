@@ -36,6 +36,10 @@ class Ability
 
       can :read, BranchOffice
     
+      can :read, BranchOfficesSchedule
+
+      can :read, Schedule
+      
     else
       return unless user.role == "client" # additional permissions for client
       can :read, User do |other_user|
@@ -49,6 +53,7 @@ class Ability
       can :create, Turn
 
       can :manage, Turn, user_id: user.id
+
     end
   end    
 end

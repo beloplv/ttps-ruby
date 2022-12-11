@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :day %>
-    <%= form.select :day, options_for_select(Schedule.days.keys) %>
+    <%= form.select :day, options_for_select(Schedule.days.keys, schedule.day) %>
   </div>
 
   <div>

@@ -15,4 +15,8 @@ class BranchOffice < ApplicationRecord
         return false 
     end
 
+    def self.return_branch_office(branch_office)
+        BranchOffice.find_by(id: branch_office)
+    end
+
 end

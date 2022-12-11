@@ -3,9 +3,9 @@
 <h1>Localities</h1>
 <br>
 <% if can? :create, Locality %>
-<div class="btn btn-success">
-<%= link_to "New locality", new_locality_path %>
-</div>
+
+<%= link_to "New locality", new_locality_path, class:"btn btn-success" %>
+
 
 <% end %>
 
@@ -29,7 +29,7 @@
       <tr>
         <td><%=locality.province%></td>
         <td><%=locality.name%></td>
-        <td><%= link_to "Show this locality", locality %></td>
+        <td><%= link_to "Show this locality", locality , class:"btn btn-primary"%></td>
       </tr>
       <% end %>
       <% end %>

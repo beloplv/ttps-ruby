@@ -31,7 +31,7 @@
 
   <p>
   <strong>User:</strong>
-  <%= turn.user_id %>
+  <%= @user.email %>
 </p>
 
 <% if turn.employee_id == nil %>
@@ -42,8 +42,13 @@
 <% else %>
   <p>
     <strong>Employee:</strong>
-    <%= turn.employee_id %>
+    <%= @employee.email %>
   </p>
 <% end %>
+
+<p>
+<strong>Branch office:</strong>
+<%= @branch_office.name %> (<%= @branch_office.address %>)
+</p>
 
 </div>

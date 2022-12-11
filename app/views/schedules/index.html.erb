@@ -4,9 +4,7 @@
  
 <br>
 <% if can? :create, Schedule %>
-<div class="btn btn-success">
-<%= link_to "New schedule", new_schedule_path %>
-</div>
+<%= link_to "New schedule", new_schedule_path, class:"btn btn-success" %>
 
 <% end %>
 
@@ -31,7 +29,7 @@
         <td><%=schedule.day%></td>
         <td><%=schedule.from.strftime("%H:%M")%></td>
         <td><%=schedule.to.strftime("%H:%M")%></td>
-        <td><%= link_to "Show this schedule", schedule %></td>
+        <td><%= link_to "Show this schedule", schedule, class:"btn btn-primary" %></td>
       </tr>
       <% end %>
       <% end %>

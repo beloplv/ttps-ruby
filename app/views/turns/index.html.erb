@@ -4,9 +4,7 @@
 
 <br>
 <% if can? :create, Turn %>
-<div class="btn btn-success">
-<%= link_to "New turn", new_turn_path %>
-</div>
+<%= link_to "New turn", new_turn_path , class:"btn btn-success"%>
 
 <% end %>
 
@@ -39,7 +37,7 @@
         <% else %>
           <td><%= turn.result %></td>
         <% end %>
-        <td><%= link_to "Show this turn", turn %></td>
+        <td><%= link_to "Show this turn", turn, class:"btn btn-primary" %></td>
       </tr>
       <% end %>
       <% end %>

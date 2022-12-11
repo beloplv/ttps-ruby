@@ -9,6 +9,9 @@ class TurnsController < ApplicationController
   # GET /turns/1 or /turns/1.json
   def show
     @in_progress = BranchOfficesSchedule.in_progress?(@turn.status)
+    @user= User.return_user(@turn.user_id)
+    @employee = User.return_user(@turn.employee_id)
+    @branch_office = BranchOffice.return_branch_office(@turn.branch_office_id)
   end
  
   # GET /turns/new

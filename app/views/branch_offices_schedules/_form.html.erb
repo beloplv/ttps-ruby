@@ -10,16 +10,24 @@
       </ul>
     </div>
   <% end %>
-
+<% if @ok %>
   <div>
     <%= form.label :branch_office_id, style: "display: block" %>
-    <%= form.select :branch_office_id, options_for_select(BranchOffice.all.collect { |x| [x.name + " (" + x.address + ") " , x.id]}) %>
+    <%= @branch_office.name %> (<%= @branch_office.address %>)
 
   </div>
 
+<% else %>
+<div>
+<%= form.label :branch_office_id, style: "display: block" %>
+<%= form.select :branch_office_id, options_for_select(BranchOffice.all.collect { |x| [x.name + " (" + x.address + ") " , x.id]}, branch_offices_schedule.branch_office_id) %>
+
+</div>
+<% end %>
+
   <div>
     <%= form.label :schedule_id, style: "display: block" %>
-    <%= form.select :schedule_id, options_for_select(Schedule.all.collect { |x| [x.day + " from " + x.from.strftime("%H:%M") + " to " + x.to.strftime("%H:%M") , x.id]}) %>
+    <%= form.select :schedule_id, options_for_select(Schedule.all.collect { |x| [x.day + " from " + x.from.strftime("%H:%M") + " to " + x.to.strftime("%H:%M") , x.id]}, branch_offices_schedule.schedule_id) %>
   </div>
 
   <div>

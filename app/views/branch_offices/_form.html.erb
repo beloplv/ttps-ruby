@@ -28,7 +28,7 @@
 
   <div>
   <%= form.label :Locality_id, style: "display: block" %>
-    <%= form.select :locality_id, options_for_select(Locality.all.collect { |x| [x.province + " - " + x.name , x.id]}, Locality.name) %>
+    <%= form.select :locality_id, options_for_select(Locality.all.collect { |x| [x.province + " - " + x.name , x.id]}, branch_office.locality_id) %>
   </div>
   
   <div>

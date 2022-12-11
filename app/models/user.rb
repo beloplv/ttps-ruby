@@ -19,4 +19,9 @@ class User < ApplicationRecord
     end
     return false 
   end
+
+  def self.return_user(user)
+    User.find_by(id: user)
+  end
+
 end

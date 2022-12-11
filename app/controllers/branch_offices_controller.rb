@@ -8,6 +8,7 @@ class BranchOfficesController < ApplicationController
 
   # GET /branch_offices/1 or /branch_offices/1.json
   def show
+    @locality = Locality.return_locality(@branch_office.locality_id)
   end
 
   # GET /branch_offices/new
