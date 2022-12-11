@@ -1,28 +1,28 @@
 # README
 
-REQUISITOS TECNICOS
+# REQUISITOS TECNICOS
 
 • Una versión reciente de Ruby (2.7 o superior). 
 • La versión estable más reciente del framework Ruby on Rails (7.0.4 al momento de escribir este documento). 
 • Una base de datos SQL (puede ser SQLite, PostgreSQL o MySQL). 
 
 
-COMANDOS PARA LEVANTAR LA APP
+# COMANDOS PARA LEVANTAR LA APP
 
 pararse en la carpeta del proyecto
 
-bundle install 
-rake db:create
-rake db:migrate
-rake db:seed
-rails s
+- bundle install 
+- rake db:create
+- rake db:migrate
+- rake db:seed
+- rails s
 
 
-UML MODELOS Y ASOCIACIONES
+# UML MODELOS Y ASOCIACIONES
 
 https://drive.google.com/file/d/1fr5qEjTA-4yDjTkEBAL8JpgXNVfDtysU/view?usp=sharing
 
-REESTRICCIONES DE FUNCIONALIDAD
+# REESTRICCIONES DE FUNCIONALIDAD
 
 ---------------------------------------------------------------------------------------------------------------
 * TABLA Usuarios
