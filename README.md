@@ -2,9 +2,9 @@
 
 # REQUISITOS TECNICOS
 
-• Una versión reciente de Ruby (2.7 o superior). 
-• La versión estable más reciente del framework Ruby on Rails (7.0.4 al momento de escribir este documento). 
-• Una base de datos SQL (puede ser SQLite, PostgreSQL o MySQL). 
+- Una versión reciente de Ruby (2.7 o superior). 
+- La versión estable más reciente del framework Ruby on Rails (7.0.4 al momento de escribir este documento). 
+- Una base de datos SQL (puede ser SQLite, PostgreSQL o MySQL). 
 
 
 # COMANDOS PARA LEVANTAR LA APP
