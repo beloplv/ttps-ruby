@@ -50,19 +50,25 @@ class BranchOfficesSchedulesController < ApplicationController
   def update
     branch_offices_schedule_params["branch_office_id"] = @branch_offices_schedule.branch_office_id
     respond_to do |format|
-      if BranchOfficesSchedule.valid_branch_office_schedule?(@branch_offices_schedule.branch_office_id, branch_offices_schedule_params["schedule_id"])
-        if @branch_offices_schedule.update(branch_offices_schedule_params)
-          format.html { redirect_to branch_offices_schedule_url(@branch_offices_schedule), notice: "Branch offices schedule was successfully updated." }
-          format.json { render :show, status: :ok, location: @branch_offices_schedule }
+      if Turn.valid_destroy_branch_offices_schedule?(@branch_offices_schedule.branch_office_id, @branch_offices_schedule.schedule_id)
+        if BranchOfficesSchedule.valid_branch_office_schedule?(@branch_offices_schedule.branch_office_id, branch_offices_schedule_params["schedule_id"])
+          if @branch_offices_schedule.update(branch_offices_schedule_params)
+            format.html { redirect_to branch_offices_schedule_url(@branch_offices_schedule), notice: "Branch offices schedule was successfully updated." }
+            format.json { render :show, status: :ok, location: @branch_offices_schedule }
+          else
+            format.html { render :edit, status: :unprocessable_entity }
+            format.json { render json: @branch_offices_schedule.errors, status: :unprocessable_entity }
+          end
         else
-          format.html { render :edit, status: :unprocessable_entity }
+          @branch_offices_schedule.errors.add(:schedule_id, :invalid, :message => ": there is already a schedule for that day in that branch office")
+          format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @branch_offices_schedule.errors, status: :unprocessable_entity }
         end
       else
-        @branch_offices_schedule.errors.add(:schedule_id, :invalid, :message => ": there is already a schedule for that day in that branch office")
+        @branch_offices_schedule.errors.add(:schedule_id, :invalid, :message => ": The branch office has pending turns at that time. Cannot be update")
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @branch_offices_schedule.errors, status: :unprocessable_entity }
-      end
+      end 
     end
   end
 

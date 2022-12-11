@@ -36,4 +36,13 @@ class Turn < ApplicationRecord
         end
         return true 
     end
+
+    def self.return_turns_client(client)
+        Turn.where(user_id: client)
+    end
+
+    def self.return_turns_employee(employee)
+        branch_office = User.find_by(id: employee)
+        Turn.where(branch_office_id: branch_office.branch_office_id)
+    end
 end

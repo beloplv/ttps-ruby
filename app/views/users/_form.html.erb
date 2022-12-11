@@ -48,7 +48,7 @@ if the role is administrator do not select this field
 <div>
   <%= f.label :role %>  
   <%= @user.role %>
-  <% if @user.role == "employee"%>
+  <% if @user.role == "employee" && current_user.role == "administrator"%>
   <div> 
   <%= f.label :branch_office_id, style: "display: block" %>
   <%= f.select :branch_office_id, options_for_select(BranchOffice.all.collect { |x| [x.name + " (" + x.address + ") " , x.id]}, user.branch_office_id) %>

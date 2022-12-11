@@ -9,4 +9,11 @@
     <%= user.role %>
   </p>
 
+<% if user.role == "employee" %>
+<p>
+<strong>Branch Office:</strong>
+<%= @branch_office.name %> (<%= @branch_office.address %>)
+</p>
+<% end %>
+
 </div>

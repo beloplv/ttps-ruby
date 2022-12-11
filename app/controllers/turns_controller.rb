@@ -3,7 +3,11 @@ class TurnsController < ApplicationController
 
   # GET /turns or /turns.json
   def index
-    @turns = Turn.all
+    if current_user.role == "client"
+      @turns = Turn.return_turns_client(current_user.id)
+    else
+      @turns = Turn.return_turns_employee(current_user.id)
+    end
   end
 
   # GET /turns/1 or /turns/1.json
@@ -22,12 +26,13 @@ class TurnsController < ApplicationController
   # GET /turns/1/edit
   def edit
     @in_progress = BranchOfficesSchedule.in_progress?(@turn.status)
+    @user= User.return_user(@turn.user_id)
+    @branch_office = BranchOffice.return_branch_office(@turn.branch_office_id)
   end
 
   # POST /turns or /turns.json
   def create
     @turn = Turn.new(turn_params)
-    p(@turn)
     @turn.user_id = current_user.id
     respond_to do |format|
       if BranchOfficesSchedule.valid_turn?(turn_params["branch_office_id"], turn_params["date"], turn_params["hour"])

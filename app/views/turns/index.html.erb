@@ -10,8 +10,12 @@
 
 <br>
 <br>
-
 <div id="turns">
+<% if @turns.empty? %>
+ <p>does not have turns</p>
+ <br>
+
+<% else %>
 <table class="table table-dark table-hover">
     <thead>
     <tr>
@@ -43,4 +47,5 @@
       <% end %>
     </tbody>
   </table>
-</div>
+<% end %>
+  </div>

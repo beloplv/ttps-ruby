@@ -6,8 +6,10 @@
 <% if can? :update, @user %>
   <%= link_to "Edit this user", edit_user_path(@user) %> 
 <% end %>
+<% if current_user.role != "client" %>
 <% if can? :read, User %>
   <%= link_to "Back to users", users_path %>
+<% end %>
 <% end %>
   <% if can? :destroy, @user %>
     <%= button_to "Destroy this user", @user, form: { data: { turbo_confirm: "want to delete it?" } },method: :delete, class: 'btn btn-danger' %>

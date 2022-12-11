@@ -8,6 +8,9 @@ class UsersController < ApplicationController
   
     # GET /users/1 or /users/1.json
     def show
+      if @user.role == "employee"
+        @branch_office = BranchOffice.return_branch_office(@user.branch_office_id)
+      end
     end 
   
     # GET /users/new

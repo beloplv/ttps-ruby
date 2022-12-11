@@ -55,3 +55,4 @@ BranchOfficesSchedule.create( branch_office_id: 2, schedule_id: 1)
 #turns
 Turn.create( date:"2022-12-19", hour: "2000-01-01 11:30:00.000000000 +0000", motive: "cards", status: "in_progress", result: nil, branch_office_id: 1, user_id: 4, employee_id: nil)
 Turn.create( date:"2022-12-19", hour: "2000-01-01 11:30:00.000000000 +0000", motive: "get money", status: "in_progress", result: nil, branch_office_id: 2, user_id: 5, employee_id: nil)
+Turn.create( date:"2022-12-05", hour: "2000-01-01 09:00:00.000000000 +0000", motive: "bank loan", status: "attended", result: "accepted", branch_office_id: 2, user_id: 5, employee_id: 3)

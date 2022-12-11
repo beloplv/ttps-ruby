@@ -34,11 +34,11 @@
 <% else %>
   <p>
     <strong>Branch Office:</strong>
-    <%= turn.branch_office_id %>
+    <%= @branch_office.name %> (<%= @branch_office.address %>)
   </p>
   <p>
     <strong>User:</strong>
-    <%= turn.user_id %>
+    <%= @user.email%>
   </p>
   <p>
     <strong>Date:</strong>

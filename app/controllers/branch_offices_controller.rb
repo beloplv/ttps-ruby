@@ -60,6 +60,7 @@ class BranchOfficesController < ApplicationController
 
   # DELETE /branch_offices/1 or /branch_offices/1.json
   def destroy
+    @locality = Locality.return_locality(@branch_office.locality_id)
     respond_to do |format|
       if User.valid_destroy_branch_office?(@branch_office.id) && Turn.valid_destroy_branch_office?(@branch_office.id)
         @branch_office.destroy
