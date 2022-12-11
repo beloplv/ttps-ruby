@@ -22,7 +22,7 @@ pararse en la carpeta del proyecto
 
 https://drive.google.com/file/d/1fr5qEjTA-4yDjTkEBAL8JpgXNVfDtysU/view?usp=sharing
 
-# REESTRICCIONES DE FUNCIONALIDAD
+# RESTRICCIONES DE FUNCIONALIDAD
 
 ---------------------------------------------------------------------------------------------------------------
 * TABLA Usuarios
